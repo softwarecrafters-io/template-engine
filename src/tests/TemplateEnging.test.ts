@@ -22,9 +22,17 @@ describe('The Template Engine', ()=>{
     it('parses template without variables', ()=>{
 			const templateText = 'This is a template with zero variables';
 			const variables = new Map<string, { toString:()=> string }>;
-			variables.set('name', 'John');
 			const parsedTemplate = parse(templateText, variables);
 
 			expect(parsedTemplate.text).toBe('This is a template with zero variables');
+    });
+
+		it('parses template with one variable', ()=>{
+			const templateText = 'This is a template with one ${variable}';
+			const variables = new Map<string, { toString:()=> string }>;
+			variables.set('variable', 'foo');
+			const parsedTemplate = parse(templateText, variables);
+
+			expect(parsedTemplate.text).toBe('This is a template with one foo');
     });
 });
